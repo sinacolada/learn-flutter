@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "974188323196",
+    "project_id": "mynotes-sina",
+    "storage_bucket": "mynotes-sina.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974188323196:android:1f58b22a2df2ca2f10c4f9",
+        "android_client_info": {
+          "package_name": "com.exitree.mynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974188323196-99o8encvo57hnhmc0p9a7g5m4abojlbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8N_AX71loCQ3W0rB49LcvLWKhpKhxp-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974188323196-99o8encvo57hnhmc0p9a7g5m4abojlbl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
