@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/constants/routes.dart' as routes;
 import 'dart:developer' as devtools show log;
 
 class LoginView extends StatefulWidget {
@@ -62,7 +63,7 @@ class _LoginViewState extends State<LoginView> {
                 );
                 if (context.mounted) {
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    "/notes/",
+                    routes.notesRoute,
                     (_) => false,
                   );
                 }
@@ -80,7 +81,7 @@ class _LoginViewState extends State<LoginView> {
               onPressed: () {
                 Navigator.pushReplacementNamed(
                   context,
-                  "/register/",
+                  routes.registerRoute,
                 );
               },
               child: const Text("Not registered yet? Register here!")),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/constants/routes.dart' as routes;
 import 'dart:developer' as devtools show log;
 
 class RegisterView extends StatefulWidget {
@@ -76,7 +77,7 @@ class _RegisterViewState extends State<RegisterView> {
               onPressed: () {
                 Navigator.pushReplacementNamed(
                   context,
-                  "/login/",
+                  routes.loginRoute,
                 );
               },
               child: const Text("Already registered? Login here!"))
