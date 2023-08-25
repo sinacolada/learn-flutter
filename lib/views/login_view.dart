@@ -1,6 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:developer' as devtools show log;
+import 'package:mynotes/constants/routes.dart' as routes;
+import 'package:mynotes/services/auth/auth_exceptions.dart';
+import 'package:mynotes/services/auth/auth_service.dart';
+
+import '../utilities/show_error_dialog.dart';
+// import 'dart:developer' as devtools show log;
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -56,22 +60,37 @@ class _LoginViewState extends State<LoginView> {
               final email = _email.text;
               final password = _password.text;
               try {
-                await FirebaseAuth.instance.signInWithEmailAndPassword(
+                await AuthService.firebase().login(
                   email: email,
                   password: password,
                 );
                 if (context.mounted) {
+                  final isEmailVerified =
+                      AuthService.firebase().currentUser?.isEmailVerified ??
+                          false;
+                  final routeTo = isEmailVerified
+                      ? routes.notesRoute
+                      : routes.verifyEmailRoute;
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    "/notes/",
+                    routeTo,
                     (_) => false,
                   );
                 }
-              } on FirebaseAuthException catch (e) {
-                if (e.code == "user-not-found") {
-                  devtools.log("User not found");
-                } else if (e.code == "wrong-password") {
-                  devtools.log("Wrong password");
-                }
+              } on UserNotFoundAuthException {
+                await showErrorDialog(
+                  context,
+                  "User not found",
+                );
+              } on WrongPasswordAuthException {
+                await showErrorDialog(
+                  context,
+                  "Wrong password",
+                );
+              } on GenericAuthException {
+                await showErrorDialog(
+                  context,
+                  "Authentication error",
+                );
               }
             },
             child: const Text("Login"),
@@ -80,7 +99,7 @@ class _LoginViewState extends State<LoginView> {
               onPressed: () {
                 Navigator.pushReplacementNamed(
                   context,
-                  "/register/",
+                  routes.registerRoute,
                 );
               },
               child: const Text("Not registered yet? Register here!")),
